@@ -20,7 +20,7 @@ export default function({ types: t }) {
 
               var content = BabelInlineImportHelper.getContents(givenPath, reference);
 
-              path.replaceWith(t.expressionStatement(t.stringLiteral(content)))
+              path.replaceWith(t.parse(`Promise.resolve(\`${content.replace(/\\/g, '\\\\').replace(/\`/g, '\\`')}\`)`).program.body[0].expression);
             },
           },
         }
