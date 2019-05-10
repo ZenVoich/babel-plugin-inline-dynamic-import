@@ -1,6 +1,6 @@
 import BabelInlineImportHelper from './helper';
 
-export default function({ types: t }) {
+export default function({ types, parse }) {
   class BabelInlineImport {
     constructor() {
       return {
@@ -20,7 +20,7 @@ export default function({ types: t }) {
 
               var content = BabelInlineImportHelper.getContents(givenPath, reference);
 
-              path.replaceWith(t.parse(`Promise.resolve(\`${content.replace(/\\/g, '\\\\').replace(/\`/g, '\\`')}\`)`).program.body[0].expression);
+              path.replaceWith(parse(`Promise.resolve(\`${content.replace(/\\/g, '\\\\').replace(/\`/g, '\\`')}\`)`).program.body[0].expression);
             },
           },
         }
